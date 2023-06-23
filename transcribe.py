@@ -2,7 +2,7 @@ import openai
 import textwrap
 import os
 
-API_KEY = "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"
+API_KEY = "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"
 openai.api_key = API_KEY
 
 def transcribe_audio(file_path):
