@@ -5,9 +5,10 @@ import textwrap
 from fpdf import FPDF
 import time
 import os
+from gui import GUIWindow
 
 
-API_KEY = "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"
+API_KEY = "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"
 openai.api_key = API_KEY
 
 
@@ -80,4 +81,23 @@ def record_voice():
 
 if __name__ == "__main__":
     # Record the voice endlessly, saving text to a single file.
+    #record_voice()
+
+    gui = GUIWindow()
+
+
+    # Define the callback function to update the GUI text
+    def display_text(text):
+        # Print the text
+        print(text)
+
+        # Update the GUI with the text
+        gui.update_text(text)
+
+
+    # Start the voice recording loop with the callback function
     record_voice()
+
+    # Run the GUI main loop
+    gui.window.mainloop()
+
