@@ -17,7 +17,7 @@ def record_voice():
 
         # Start recording.
         frames = []
-        for _ in range(int(44100 / 1024 * 10)):
+        for _ in range(int(44100 / 1024 * 5)):
             # Get the audio data from the microphone.
             data = in_stream.read(1024)
             frames.append(data)
@@ -39,5 +39,5 @@ def record_voice():
     pa.terminate()
 
 if __name__ == "__main__":
-    # Record the voice endlessly, saving files every 10 seconds.
+    # Record the voice endlessly, saving files every 5 seconds.
     record_voice()
