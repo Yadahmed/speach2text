@@ -2,17 +2,14 @@ import pyaudio
 import wave
 import openai
 import textwrap
-from fpdf import FPDF
-import time
 import os
-from gui import GUIWindow
 
 
-API_KEY = "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"
+API_KEY = "API_KEY"
 openai.api_key = API_KEY
 
 
-def record_voice():
+def record_voice(callback):
     # Create a PyAudio object.
     pa = pyaudio.PyAudio()
 
@@ -72,32 +69,14 @@ def record_voice():
             # Append the generated text to the output file
             file.write(wrapped_text)
 
-            for char in wrapped_text:
-                print(char, end='', flush=True)
-                # time.sleep(0.001)
-
-    pa.terminate()
+            callback(wrapped_text)
 
 
 if __name__ == "__main__":
-    # Record the voice endlessly, saving text to a single file.
-    #record_voice()
-
-    gui = GUIWindow()
-
-
-    # Define the callback function to update the GUI text
+    # Define the callback function to display the text
     def display_text(text):
         # Print the text
         print(text)
 
-        # Update the GUI with the text
-        gui.update_text(text)
-
-
     # Start the voice recording loop with the callback function
-    record_voice()
-
-    # Run the GUI main loop
-    gui.window.mainloop()
-
+    record_voice(display_text)
