@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Voice Transcription</title>
+</head>
+<body>
+    <h1>Voice Transcription</h1>
+    <button onclick="startRecording()">Start Recording</button>
+    <div id="transcription"></div>
+
+    <script>
+        function startRecording() {
+            // Call the /record route to start recording
+            fetch('/record')
+                .then(response => {
+                    console.log('Recording started');
+                })
+                .catch(error => {
+                    console.error('Error starting recording:', error);
+                });
+        }
+    </script>
+</body>
+</html>

@@ -5,7 +5,7 @@ import textwrap
 import os
 
 
-API_KEY = "API_KEY"
+API_KEY = "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"
 openai.api_key = API_KEY
 
 
