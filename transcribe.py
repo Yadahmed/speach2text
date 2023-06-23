@@ -1,31 +1,29 @@
 import openai
 import textwrap
-from fpdf import FPDF
+import os
 
 API_KEY = "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"
 openai.api_key = API_KEY
 
-def transcribe_audio(audio_file_path):
-    with open(audio_file_path, "rb") as audio_file:
-        transcript = openai.Audio.translate("whisper-1", audio_file)
-        wrapped_text = textwrap.fill(transcript["text"], width=95)
+def transcribe_audio(file_path):
+    audio_file = open(file_path, "rb")
+    transcript = openai.Audio.translate("whisper-1", audio_file)
+    wrapped_text = textwrap.fill(transcript["text"], width=95)
+    audio_file.close()
 
-    return wrapped_text
-
-def process_recording(audio_file_path):
-    # Transcribe audio to text
-    wrapped_text = transcribe_audio(audio_file_path)
-
-    # Save the transcript to a text file
-    transcript_file_path = audio_file_path.replace(".wav", ".txt")
-    with open(transcript_file_path, 'w', encoding='utf-8') as file:
+    with open(f"{file_path}.txt", 'w', encoding='utf-8') as file:
         file.write(wrapped_text)
 
-    print(f"Transcription completed for {audio_file_path}.")
+    for char in wrapped_text:
+        print(char, end='', flush=True)
+        # time.sleep(0.001)
+
 
 if __name__ == "__main__":
-    # Process the recorded audio files
+    # Transcribe the recorded audio files
+    directory = os.getcwd()
     while True:
-        for i in range(1, 100):  # Adjust the range as needed
-            audio_file_path = f"recording{i}.wav"
-            process_recording(audio_file_path)
+        for file in os.listdir(directory):
+            if file.endswith(".wav"):
+                file_path = os.path.join(directory, file)
+                transcribe_audio(file_path)

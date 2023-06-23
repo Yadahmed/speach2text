@@ -10,4 +10,4 @@ transcribe_process = subprocess.Popen(["python", "transcribe.py"])
 transcribe_process.wait()
 
 # Terminate the record.py process
-record_process.terminate()
+record_process

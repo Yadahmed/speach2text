@@ -1,5 +1,7 @@
 import pyaudio
 import wave
+import time
+import os
 
 def record_voice():
     # Create a PyAudio object.
@@ -8,6 +10,20 @@ def record_voice():
     counter = 1  # Counter for naming the recordings
 
     while True:
+
+        # List of file paths to delete
+        file_paths = [f"recording{counter-1}.wav"]
+
+        for file_path in file_paths:
+            if os.path.exists(file_path):
+                try:
+                    os.remove(file_path)
+                    print(f"File '{file_path}' deleted successfully.")
+                except OSError as e:
+                    print(f"Error deleting file '{file_path}': {e}")
+            else:
+                print(f"File '{file_path}' does not exist.")
+
         # Open a microphone input stream.
         in_stream = pa.open(format=pyaudio.paInt16,
                             channels=1,
@@ -35,6 +51,11 @@ def record_voice():
         wave_file.close()
 
         counter += 1  # Increment the counter for the next recording
+
+        time.sleep(5)  # Wait for 5 seconds before the next recording
+
+    pa.terminate()
+
 
 if __name__ == "__main__":
     # Record the voice endlessly, saving files every 5 seconds.
