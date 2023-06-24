@@ -1,0 +1,53 @@
+*,*:after,*::before{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: arial;
+    font-size: 16px;
+    
+    background: linear-gradient(to right bottom,#d13cff,#031f6a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #000;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    width: 100%s;
+}
+
+.voice_to_text{
+    width: 600px;
+    text-align: center;
+}
+
+
+#convert_text{
+    width:100%;
+    height: 200px;
+    border-radius: 10px;
+    resize: none;
+    padding: 10px;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+h1{
+    font-size: 50px;
+    color:#fff;
+}
+
+button{
+    padding: 12px 20px;
+    background: #0ea4da;
+    border:0 ;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+    
+
+    
+}
